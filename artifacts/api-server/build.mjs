@@ -29,6 +29,9 @@ async function buildAll() {
     // - use path traversal to read files (e.g. @google-cloud/secret-manager loads sibling .proto files)
     external: [
       "*.node",
+      "drizzle-orm",
+      "drizzle-orm/*",
+      "pg",
       "sharp",
       "better-sqlite3",
       "sqlite3",
@@ -121,6 +124,9 @@ globalThis.__dirname = __bannerPath.dirname(globalThis.__filename);
 }
 
 buildAll().catch((err) => {
-  console.error(err);
+  console.error("Build error:", err?.message || err);
+  if (err?.errors?.length) {
+    console.error("esbuild errors:", JSON.stringify(err.errors, null, 2));
+  }
   process.exit(1);
 });
