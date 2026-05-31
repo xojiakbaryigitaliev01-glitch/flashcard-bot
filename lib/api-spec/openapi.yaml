@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Flashcard app API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: cards
+    description: Flashcard operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /cards/{userId}:
+    get:
+      operationId: getCards
+      tags: [cards]
+      summary: Get all cards for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of cards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+
+  /cards/{userId}/save:
+    post:
+      operationId: saveCards
+      tags: [cards]
+      summary: Save all cards for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardListInput"
+      responses:
+        "200":
+          description: Saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveResult"
+
+  /cards/{userId}/results:
+    post:
+      operationId: saveResults
+      tags: [cards]
+      summary: Save study results for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResultsInput"
+      responses:
+        "200":
+          description: Results saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveResult"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+
+    Card:
+      type: object
+      required: [id, front, back]
+      properties:
+        id:
+          type: integer
+        front:
+          type: string
+        back:
+          type: string
+
+    CardListInput:
+      type: object
+      required: [cards]
+      properties:
+        cards:
+          type: array
+          items:
+            $ref: "#/components/schemas/Card"
+
+    ResultsInput:
+      type: object
+      required: [results]
+      properties:
+        results:
+          type: object
+          additionalProperties:
+            type: boolean
+
+    SaveResult:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+        message:
+          type: ["string", "null"]

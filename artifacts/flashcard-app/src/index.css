@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 228 46% 10%;
+  --foreground: 0 0% 100%;
+  --border: 228 20% 25%;
+  --input: 228 20% 20%;
+  --ring: 234 89% 73%;
+  --primary: 234 89% 73%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 228 30% 18%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 228 30% 16%;
+  --muted-foreground: 228 10% 60%;
+  --accent: 270 60% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --card: 228 40% 13%;
+  --card-foreground: 0 0% 100%;
+  --card-border: 228 20% 25%;
+  --popover: 228 40% 13%;
+  --popover-foreground: 0 0% 100%;
+  --popover-border: 228 20% 25%;
+  --sidebar: 228 46% 10%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-border: 228 20% 25%;
+  --sidebar-primary: 234 89% 73%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 270 60% 55%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-ring: 234 89% 73%;
+  --chart-1: 234 89% 73%;
+  --chart-2: 160 84% 39%;
+  --chart-3: 270 60% 55%;
+  --chart-4: 38 92% 50%;
+  --chart-5: 0 84% 60%;
+  --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --app-font-serif: Georgia, serif;
+  --app-font-mono: Menlo, monospace;
+  --radius: 0.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--app-font-sans);
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+  color: #ffffff;
+  overflow-x: hidden;
+}
